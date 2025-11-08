@@ -36,8 +36,25 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+            // Ktor Client
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.contentNegotiation)
+            implementation(libs.ktor.serialization.json)
+            implementation(libs.ktor.client.auth)
+
+            // Serialization & DateTime
+            implementation(libs.kotlinx.serialization)
+            implementation(libs.kotlinx.datetime)
+
+            // Koin
+            implementation(libs.koin.core)
         }
+
+        androidMain.dependencies {
+            // Room - Android only
+            implementation(libs.room.common)
+        }
+
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
