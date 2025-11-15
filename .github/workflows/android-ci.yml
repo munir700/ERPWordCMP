@@ -33,19 +33,19 @@ jobs:
       - name: Set Environment Variables
         run: |
           if [[ "${{ matrix.envType }}" == "dev" ]]; then
-            echo "BUILD_TYPE=debug" >> $GITHUB_ENV
+            echo "BUILD_TYPE=Debug" >> $GITHUB_ENV
             echo "API_URL=https://dev.example.com" >> $GITHUB_ENV
           elif [[ "${{ matrix.envType }}" == "staging" ]]; then
-            echo "BUILD_TYPE=staging" >> $GITHUB_ENV
+            echo "BUILD_TYPE=Release" >> $GITHUB_ENV
             echo "API_URL=https://staging.example.com" >> $GITHUB_ENV
           elif [[ "${{ matrix.envType }}" == "prod" ]]; then
-            echo "BUILD_TYPE=release" >> $GITHUB_ENV
+            echo "BUILD_TYPE=Release" >> $GITHUB_ENV
             echo "API_URL=https://api.example.com" >> $GITHUB_ENV
           fi
 
       # Build environment-specific APKs
       - name: Build App
-        run: ./gradlew assemble${BUILD_TYPE}
+        run: ./gradlew assemble${{ env.BUILD_TYPE }}
 
   test:
     runs-on: ubuntu-latest
