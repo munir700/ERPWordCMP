@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 
 /**
- * Android ci - test
+ * Android ci - test-1
  * Abstract base ViewModel implementing MVI pattern
  * Provides common functionality for state management, event handling, and side effects
  */
