@@ -13,23 +13,25 @@ jobs:
     # 3-environment matrix
     strategy:
       matrix:
-        envType: [dev, staging, prod]
+        envType: [ dev, staging, prod ]
 
     # Default variables (can be overridden per environment)
     env:
       APP_NAME: MyApp
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - run: chmod +x gradlew
+      - name: Give Gradle Permission
+        run: chmod +x gradlew
 
-      # Set environment-specific variables
       - name: Set Environment Variables
         run: |
           if [[ "${{ matrix.envType }}" == "dev" ]]; then
@@ -45,7 +47,7 @@ jobs:
 
       # Build environment-specific APKs
       - name: Build App
-        run: ./gradlew assemble${{ env.BUILD_TYPE }}
+        run: ./gradlew assemble$BUILD_TYPE
 
   test:
     runs-on: ubuntu-latest
